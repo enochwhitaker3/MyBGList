@@ -1,8 +1,11 @@
+<<<<<<< HEAD
 ﻿using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.OpenApi.Models;
 
+=======
+>>>>>>> parent of e7d2b0e (Class Prep 3)
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -19,6 +22,7 @@ builder.Services.AddSwaggerGen(options => {
         new OpenApiInfo { Title = "MyBGList", Version = "v2.0" });
 });
 
+<<<<<<< HEAD
 builder.Services.AddCors(options => {
     options.AddDefaultPolicy(cfg => {
         cfg.WithOrigins(builder.Configuration["AllowedOrigins"]);
@@ -45,6 +49,8 @@ builder.Services.AddVersionedApiExplorer(options => {
 });
 
 
+=======
+>>>>>>> parent of e7d2b0e (Class Prep 3)
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -68,11 +74,10 @@ else
 
 app.UseHttpsRedirection();
 
-app.UseCors("AnyOrigin");
-
 app.UseAuthorization();
 
 
+<<<<<<< HEAD
 app.MapGet("/v{version:ApiVersion}/error",
     [ApiVersion("1.0")]
     [ApiVersion("2.0")]
@@ -101,8 +106,11 @@ app.MapGet("/v{version:ApiVersion}/cod/test",
         "</script>" +
         "<noscript>Your client does not support JavaScript</noscript>",
         "text/html"));
+=======
+app.MapGet("/error", () => Results.Problem());
+app.MapGet("/error/test", () => { throw new Exception("test"); });
+>>>>>>> parent of e7d2b0e (Class Prep 3)
 
-app.MapControllers()
-    .RequireCors("AnyOrigin");
+app.MapControllers();
 
 app.Run();
